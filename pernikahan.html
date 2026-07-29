@@ -4,202 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katalog Undangan Pernikahan - Wadah.Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #2C2C2C; --accent: #D4AF37; --accent-light: #F9F6F0; --text-dark: #333333; --text-light: #777777; --white: #FFFFFF; }
+        :root {
+            --primary: #2C2C2C;
+            --accent: #D4AF37;
+            --accent-light: #F9F6F0;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --white: #FFFFFF;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); background-color: var(--accent-light); line-height: 1.6; }
+        
         header { background: var(--white); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .brand { font-size: 24px; font-weight: 700; color: var(--primary); }
+        .brand { font-size: 24px; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
         .brand span { color: var(--accent); }
-        nav a { background: var(--primary); color: var(--white); padding: 8px 18px; border-radius: 20px; text-decoration: none; font-size: 14px; }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        .title { text-align: center; margin-bottom: 30px; }
-        .title h2 { font-size: 32px; color: var(--primary); margin-bottom: 10px; }
-        .category-title { font-size: 20px; color: var(--primary); margin: 30px 0 15px 0; border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
-        .link-list { display: flex; flex-direction: column; gap: 10px; }
-        .link-item { background: var(--white); padding: 12px 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(212,175,55,0.2); box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.2s; }
-        .link-item:hover { border-color: var(--accent); transform: translateX(5px); }
-        .link-item h4 { font-size: 15px; color: var(--primary); }
-        .btn-view { padding: 6px 14px; background: var(--accent); color: var(--white); border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: 500; white-space: nowrap; }
-        .btn-view:hover { opacity: 0.9; }
+        .back-btn { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .back-btn:hover { color: var(--accent); }
+
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; }
+        .catalog-header { text-align: center; margin-bottom: 50px; }
+        .catalog-header h1 { font-size: 32px; color: var(--primary); margin-bottom: 10px; }
+        .catalog-header p { color: var(--text-light); }
+
+        /* Grid Kartu Katalog */
+        .grid-catalog { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+        
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            transition: 0.3s;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: var(--accent); }
+
+        /* Area Gambar Mockup */
+        .card-img {
+            width: 100%;
+            height: 280px;
+            background: #EFECE6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .card:hover .card-img img { transform: scale(1.05); }
+
+        /* Bagian Bawah Kartu & Tombol */
+        .card-body { padding: 20px; text-align: center; }
+        .card-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+
+        .btn-preview {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: #8C6D46; /* Warna cokelat elegan khas tombol contoh */
+            color: var(--white);
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-preview:hover { background-color: var(--accent); }
+
+        footer { text-align: center; padding: 30px; background: var(--primary); color: var(--white); font-size: 14px; margin-top: 60px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="brand">Wadah<span>.Studio</span></div>
-        <nav>
-            <a href="index.html"><i class="fas fa-arrow-left"></i> Beranda</a>
-        </nav>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
     </header>
 
     <div class="container">
-        <div class="title">
-            <h2>Katalog Undangan Pernikahan</h2>
-            <p>Pilih berbagai tema dan desain eksklusif untuk pernikahan Anda:</p>
+        <div class="catalog-header">
+            <h1>Katalog Undangan Pernikahan</h1>
+            <p>Pilih berbagai tema dan desain eksklusif untuk hari spesial Anda</p>
         </div>
 
-        <!-- TIPE ART -->
-        <h3 class="category-title">Tema Art</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Art - 01</h4><a href="https://anezkacreative.com/art-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 02</h4><a href="https://anezkacreative.com/art-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 03</h4><a href="https://anezkacreative.com/art-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 04</h4><a href="https://anezkacreative.com/art-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 05</h4><a href="https://anezkacreative.com/art-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 06</h4><a href="https://anezkacreative.com/art-06/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 07</h4><a href="https://anezkacreative.com/art-07/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 08</h4><a href="https://anezkacreative.com/art-08/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 09</h4><a href="https://anezkacreative.com/art-09/#opening" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 10</h4><a href="https://anezkacreative.com/art-10/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 12</h4><a href="https://anezkacreative.com/art-12/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 13</h4><a href="https://anezkacreative.com/art-13/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 14</h4><a href="https://anezkacreative.com/art-14/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 15</h4><a href="https://anezkacreative.com/art-15/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 16</h4><a href="https://anezkacreative.com/art-16/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 17</h4><a href="https://anezkacreative.com/art-17/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 18</h4><a href="https://anezkacreative.com/art-18/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Art - 19</h4><a href="https://anezkacreative.com/art-19/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-        </div>
+        <div class="grid-catalog">
+            
+            <!-- Desain 01 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Pernikahan Art 01">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Art - 01</div>
+                    <a href="https://wa.me/6285609494954?text=Halo%20Wadah.Studio,%20saya%20ingin%20lihat%20live%20preview%20untuk%20tema%20Pernikahan%20Art-01" target="_blank" class="btn-preview">
+                        <i class="fas fa-eye"></i> Live Preview
+                    </a>
+                </div>
+            </div>
 
-        <!-- TIPE LUXURY -->
-        <h3 class="category-title">Tema Luxury</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Luxury - 01</h4><a href="https://undanganonlineaja.id/lux-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 02</h4><a href="https://undanganonlineaja.id/lux-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 03</h4><a href="https://undanganonlineaja.id/lux-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 04</h4><a href="https://undanganonlineaja.id/lux-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 05</h4><a href="https://undanganonlineaja.id/lux-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 06</h4><a href="https://undanganonlineaja.id/lux-06/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 07</h4><a href="https://undanganonlineaja.id/lux-07/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Luxury - 08</h4><a href="https://undanganonlineaja.id/lux-08/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-        </div>
+            <!-- Desain 02 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1519741497674-61148163552?auto=format&fit=crop&w=600&q=80" alt="Pernikahan Art 02">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Art - 02</div>
+                    <a href="https://wa.me/6285609494954?text=Halo%20Wadah.Studio,%20saya%20ingin%20lihat%20live%20preview%20untuk%20tema%20Pernikahan%20Art-02" target="_blank" class="btn-preview">
+                        <i class="fas fa-eye"></i> Live Preview
+                    </a>
+                </div>
+            </div>
 
-        <!-- TIPE ELEGANT -->
-        <h3 class="category-title">Tema Elegant</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Elegant - 01</h4><a href="https://anezkacreative.com/elegant-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 02</h4><a href="https://anezkacreative.com/elegant-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 03</h4><a href="https://anezkacreative.com/elegant-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 04</h4><a href="https://anezkacreative.com/elegant-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 05</h4><a href="https://anezkacreative.com/elegant-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 06</h4><a href="https://anezkacreative.com/elegant-06/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 07</h4><a href="https://anezkacreative.com/elegant-07/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 08</h4><a href="https://anezkacreative.com/elegant-08/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 09</h4><a href="https://anezkacreative.com/elegant-09/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 10</h4><a href="https://anezkacreative.com/elegant-10/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 11</h4><a href="https://anezkacreative.com/elegant-11/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Elegant - 12</h4><a href="https://anezkacreative.com/elegant-12/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-        </div>
+            <!-- Desain 03 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=600&q=80" alt="Pernikahan Art 03">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Art - 03</div>
+                    <a href="https://wa.me/6285609494954?text=Halo%20Wadah.Studio,%20saya%20ingin%20lihat%20live%20preview%20untuk%20tema%20Pernikahan%20Art-03" target="_blank" class="btn-preview">
+                        <i class="fas fa-eye"></i> Live Preview
+                    </a>
+                </div>
+            </div>
 
-        <!-- TIPE FLOWER -->
-        <h3 class="category-title">Tema Flower</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Flower - 01</h4><a href="https://anezkacreative.com/flower-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 02</h4><a href="https://anezkacreative.com/flower-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 03</h4><a href="https://anezkacreative.com/flower-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 04</h4><a href="https://anezkacreative.com/flower-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 05</h4><a href="https://anezkacreative.com/flower-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 06</h4><a href="https://anezkacreative.com/flower-06/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 07</h4><a href="https://anezkacreative.com/flower-07/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 08</h4><a href="https://anezkacreative.com/flower-08/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 09</h4><a href="https://anezkacreative.com/flower-09/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 10</h4><a href="https://anezkacreative.com/flower-10/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 11</h4><a href="https://anezkacreative.com/flower-11/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 12</h4><a href="https://anezkacreative.com/flower-12/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 13</h4><a href="https://anezkacreative.com/flower-13/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 14</h4><a href="https://anezkacreative.com/flower-14/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 15</h4><a href="https://anezkacreative.com/flower-15/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 16</h4><a href="https://anezkacreative.com/flower-16/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 17</h4><a href="https://anezkacreative.com/flower-17/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 18</h4><a href="https://anezkacreative.com/flower-18/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Flower - 19 Betawi</h4><a href="https://anezkacreative.com/flower-19-betawi/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-        </div>
+            <!-- Desain 04 -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Pernikahan Art 04">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Art - 04</div>
+                    <a href="https://wa.me/6285609494954?text=Halo%20Wadah.Studio,%20saya%20ingin%20lihat%20live%20preview%20untuk%20tema%20Pernikahan%20Art-04" target="_blank" class="btn-preview">
+                        <i class="fas fa-eye"></i> Live Preview
+                    </a>
+                </div>
+            </div>
 
-        <!-- TIPE ROMANCE -->
-        <h3 class="category-title">Tema Romance & Eksklusif</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Romance - 01</h4><a href="https://anezkacreative.com/romance-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Romance - 02</h4><a href="https://anezkacreative.com/romance-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Romance - 03</h4><a href="https://anezkacreative.com/romance-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Romance - 04</h4><a href="https://anezkacreative.com/romance-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Romance - 05</h4><a href="https://anezkacreative.com/romance-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi L009</h4><a href="https://anezkacreative.com/l009/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi G010</h4><a href="https://anezkacreative.com/g010/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi S001</h4><a href="https://anezkacreative.com/s001/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi E011</h4><a href="https://anezkacreative.com/e011/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi E008</h4><a href="https://anezkacreative.com/e008/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi E001</h4><a href="https://anezkacreative.com/e001/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi E003</h4><a href="https://anezkacreative.com/e003/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi E004</h4><a href="https://anezkacreative.com/e004/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi L005</h4><a href="https://anezkacreative.com/l005/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi E010</h4><a href="https://anezkacreative.com/e010/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi M011</h4><a href="https://anezkacreative.com/m011/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi M001</h4><a href="https://anezkacreative.com/m001/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi M007</h4><a href="https://anezkacreative.com/m007/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi D007</h4><a href="https://anezkacreative.com/d007/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Koleksi U025</h4><a href="https://anezkacreative.com/u025/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-        </div>
-
-        <!-- TIPE MOTION -->
-        <h3 class="category-title">Tema Motion</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Motion - 01</h4><a href="https://undanganonlineaja.id/u-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 02</h4><a href="https://undanganonlineaja.id/u-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 03</h4><a href="https://undanganonlineaja.id/u-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 04</h4><a href="https://undanganonlineaja.id/u-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 05</h4><a href="https://undanganonlineaja.id/u-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 06</h4><a href="https://undanganonlineaja.id/u-06/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 07</h4><a href="https://undanganonlineaja.id/u-07/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 08</h4><a href="https://undanganonlineaja.id/u-08/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 09</h4><a href="https://undanganonlineaja.id/u-09/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 10</h4><a href="https://undanganonlineaja.id/u-10/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 11</h4><a href="https://undanganonlineaja.id/u-11/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 12</h4><a href="https://undanganonlineaja.id/u-12/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 13</h4><a href="https://undanganonlineaja.id/u-13/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 14</h4><a href="https://undanganonlineaja.id/u-14/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 15</h4><a href="https://undanganonlineaja.id/u-15/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 16</h4><a href="https://undanganonlineaja.id/u-16/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 17</h4><a href="https://undanganonlineaja.id/u-17/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 18</h4><a href="https://undanganonlineaja.id/u-18/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 19</h4><a href="https://undanganonlineaja.id/u-19/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 20</h4><a href="https://undanganonlineaja.id/u-20/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 21</h4><a href="https://undanganonlineaja.id/u-21/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 22</h4><a href="https://undanganonlineaja.id/u-22/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 23</h4><a href="https://undanganonlineaja.id/u-23/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Motion - 24</h4><a href="https://undanganonlineaja.id/u-24/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-        </div>
-
-        <!-- TIPE WATERCOLOR -->
-        <h3 class="category-title">Tema Watercolor</h3>
-        <div class="link-list">
-            <div class="link-item"><h4>Watercolor - 25</h4><a href="https://undanganonlineaja.id/w-25/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 01</h4><a href="https://undanganonlineaja.id/w-01/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 02</h4><a href="https://undanganonlineaja.id/w-02/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 03</h4><a href="https://undanganonlineaja.id/w-03/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 04</h4><a href="https://undanganonlineaja.id/w-04/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 05</h4><a href="https://undanganonlineaja.id/w-05/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 06</h4><a href="https://undanganonlineaja.id/w-06/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 07</h4><a href="https://undanganonlineaja.id/w-07/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 08</h4><a href="https://undanganonlineaja.id/w-08/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 09</h4><a href="https://undanganonlineaja.id/w-09/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 10</h4><a href="https://undanganonlineaja.id/w-10/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 11</h4><a href="https://undanganonlineaja.id/w-11/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 12</h4><a href="https://undanganonlineaja.id/w-12/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 13</h4><a href="https://undanganonlineaja.id/w-13/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 14</h4><a href="https://undanganonlineaja.id/w-14/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 15</h4><a href="https://undanganonlineaja.id/w-15/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 16</h4><a href="https://undanganonlineaja.id/w-16/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 17</h4><a href="https://undanganonlineaja.id/w-17/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 18</h4><a href="https://undanganonlineaja.id/w-18/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 19</h4><a href="https://undanganonlineaja.id/w-19/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 20</h4><a href="https://undanganonlineaja.id/w-20/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 21</h4><a href="https://undanganonlineaja.id/w-21/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 22</h4><a href="https://undanganonlineaja.id/w-22/" target="_blank" class="btn-view">Lihat Contoh</a></div>
-            <div class="link-item"><h4>Watercolor - 23</h4><a href="https://undanganonlineaja.id/w-23/" target="_blank" class="btn-view">Lihat Contoh</a></div>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Wadah.Studio. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
